@@ -22,6 +22,7 @@ i { font-weight: 300; color: #00000044; display: block; margin-top: 20px; }
 }
 #output div {
   padding-top: 20px;
+  letter-spacing: 2px;
   float: left;
   width: 25%;
 }
@@ -41,7 +42,7 @@ input.focus();
 
 async function solve() {
   const letters = new Set(input.value.toLowerCase().split(""));
-  input.style.backgroundColor = letters.size < 7 ? "#ffddddaa" : "#ddffddaa";
+  input.style.backgroundColor = letters.size < 7 ? "#ffddddaa" : "#ffffff";
   while (output.children.length) {
     output.removeChild(output.children[0]);
   }
