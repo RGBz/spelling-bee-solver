@@ -3,17 +3,17 @@
 <head>
 <title>Spelling Bee Solver</title>
 <style>
-body, html { margin: 0; padding: 0; height: 100%; background-color: #ffd; }
+body, html { margin: 0; padding: 0; height: 100%; background-color: rgb(247, 218, 33); }
 body, input, div { text-align: center; font-family: sans-serif; font-size: 24px; }
 body { display: flex; flex-direction: column; font-weight: 300; }
-i { font-weight: 300; color: #00000044; display: block; margin-top: 20px; }
+i { font-weight: 300; color: #00000088; display: block; margin-top: 20px; font-style: normal; }
 #input {
   border: none;
   outline: none;
   margin: 20px 0;
   font-size: 48px;
-  font-weight: 500;
-  background-color: #ffddddaa;
+  font-weight: 700;
+  background-color: #ff000044;
   width: 100%;
   display: block;
   line-height: 80px;
@@ -42,7 +42,7 @@ input.focus();
 
 async function solve() {
   const letters = new Set(input.value.toLowerCase().split(""));
-  input.style.backgroundColor = letters.size < 7 ? "#ffddddaa" : "#ffffff";
+  input.style.backgroundColor = letters.size < 7 ? "#ff000044" : "#ffffff";
   while (output.children.length) {
     output.removeChild(output.children[0]);
   }
