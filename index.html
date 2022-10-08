@@ -3,16 +3,78 @@
 <head>
 <title>Spelling Bee Solver</title>
 <style>
+body, html { margin: 0; padding: 0; height: 100%; background-color: #ffd; }
 body, input, div { text-align: center; font-family: sans-serif; font-size: 24px; }
+body { display: flex; flex-direction: column; font-weight: 300; }
+i { font-weight: 300; color: #00000044; display: block; margin-top: 20px; }
+#input {
+  border: none;
+  outline: none;
+  margin: 20px 0;
+  font-size: 48px;
+  font-weight: 500;
+  background-color: #ffddddaa;
+  width: 100%;
+  display: block;
+  line-height: 80px;
+  text-transform: uppercase;
+  letter-spacing: 24px;
+}
+#output div {
+  padding-top: 20px;
+  float: left;
+  width: 25%;
+}
 </style>
 </head>
 <body>
-Spelling Bee Letters (first letter is the center one)
-<input id="input" onkeyup="solve()" size="50" />
+<i>Enter the Spelling Bee letters with the <strong>center letter first</strong>:</i>
+<input id="input" onkeyup="solve()" />
 <div id="output"></div>
 <script>
 
-const words = `aardvark
+const words = loadWords();
+const input = document.getElementById("input");
+const output = document.getElementById("output");
+
+input.focus();
+
+async function solve() {
+  const letters = new Set(input.value.toLowerCase().split(""));
+  input.style.backgroundColor = letters.size < 7 ? "#ffddddaa" : "#ddffddaa";
+  while (output.children.length) {
+    output.removeChild(output.children[0]);
+  }
+  for (const word of words) {
+    if (matches(input.value[0], letters, word)) {
+      const solution = document.createElement("div");
+      solution.innerText = word;
+      output.appendChild(solution);
+    }
+  }
+}
+
+function matches(required, letters, word) {
+  if (word.length <= 3) {
+    return false;
+  }
+  const hashed = new Set(word.toLowerCase().split(""));
+  if (hashed.size > letters.size) {
+    return false;
+  }
+  if (!hashed.has(required)) {
+    return false;
+  }
+  for (const letter of hashed) {
+    if (!letters.has(letter)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+function loadWords() {
+  return `aardvark
 aardwolf
 aaron
 aback
@@ -58122,40 +58184,7 @@ zooplankton
 zoos
 zulu
 zulus`.split("\n");
-const input = document.getElementById("input");
-const output = document.getElementById("output");
-input.focus();
-
-async function solve() {
-    const letters = new Set(input.value.toLowerCase().split(""));
-    const solutions = [];
-    for (const word of words) {
-        if (matches(input.value[0], letters, word)) {
-            solutions.push(word);
-        }
-    }
-    output.innerText = solutions.join("\n");
 }
-
-function matches(required, letters, word) {
-    if (word.length <= 3) {
-        return false;
-    }
-    const hashed = new Set(word.toLowerCase().split(""));
-    if (hashed.size > letters.size) {
-        return false;
-    }
-    if (!hashed.has(required)) {
-        return false;
-    }
-    for (const letter of hashed) {
-        if (!letters.has(letter)) {
-            return false;
-        }
-    }
-    return true;
-}
-
 </script>
 </body>
 </html>
