@@ -7,7 +7,8 @@ body, input, div { text-align: center; font-family: sans-serif; font-size: 24px;
 </style>
 </head>
 <body>
-<input id="input" onkeyup="solve()" placeholder="Spelling Bee Letters (first letter is the center one)" size="50" />
+Spelling Bee Letters (first letter is the center one)
+<input id="input" onkeyup="solve()" size="50" />
 <div id="output"></div>
 <script>
 
@@ -58123,6 +58124,7 @@ zulu
 zulus`.split("\n");
 const input = document.getElementById("input");
 const output = document.getElementById("output");
+input.focus();
 
 async function solve() {
     const letters = new Set(input.value.toLowerCase().split(""));
